@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gmail generater</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+        gap: 3rem;
+      }
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        border: 1px solid #000;
+        border-radius: 10px;
+        align-items: center;
+        gap: 3rem;
+      }
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .generated-mail {
+        display: none;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .generated-mail.active{
+        display: flex;
+      }
+      .all-gmail {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <div class="title">Gmail Generater</div>
+      <form class="form" id="form">
+        <label for="email">Email</label>
+        <input type="email" name="" id="email" onchange="inputText()"/>
+        <button type="submit">Generate</button>
+      </form>
+    </div>
+
+    <div class="generated-mail">
+      <div class="title">Generated Gmail</div>
+      <div class="all-gmail">
+        
+      </div>
+    </div>
+  </body>
+  <script src="script.js" type="text/javascript" charset="utf-8"></script>
+</html>
