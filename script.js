@@ -45,8 +45,7 @@ input = document.getElementById('email'),
 displayGmails = document.querySelector('.generated-mail'),
 next = document.querySelector('.next-btn'),
 prev = document.querySelector('.prev-btn'),
-copyText = document.querySelector('.gmail'),
-copyBtn = document.querySelector('.gmail>span'),
+copyBtn = document.querySelector('.copy-btn'),
 currentGmailCount = document.querySelector('.current'),
 totalGmailCount = document.querySelector('.total'),
 gmailContainer = document.querySelector('.all-gmail');
@@ -57,13 +56,10 @@ allGmail;
 
 const createGmailDiv = (gmail,domain) =>{
   const div = document.createElement('div');
-  const span = document.createElement('span');
-  span.innerHTML = '<i class="fa-regular fa-copy"></i>'
 
   div.className = 'gmail'
   text = `${gmail}@${domain}`
   div.innerHTML = text
-  div.appendChild(span)
   return div;
 }
 
@@ -122,12 +118,18 @@ prev.addEventListener("click", ()=>{
   gmailContainer.innerHTML = ''
   gmailContainer.appendChild(createGmailDiv(gmail,Domain));
   currentGmailCount.innerHTML = current+1;
+  
 });
 
 //copy text 
-  copyBtn.addEventListener("click", ()=>{
-
-  navigator.clipboard.writeText(copyText.innerText);
-  copyBtn.children[0].classList.toggle('fa-copy')
-  copyBtn.children[0].classList.toggle('fa-square-check')
+document.addEventListener("click", (e)=>{
+  e.preventDefault();
+  if(e.target.classList.contains('fa-regular')){
+    console.log('find')
+    let text = `${allGmail[current]}@${Domain}`
+  navigator.clipboard.writeText(text);
+  copyBtn.classList.add('copied');
+  }else{
+    copyBtn.classList.remove('copied');
+  }
 })
