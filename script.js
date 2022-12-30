@@ -40,23 +40,25 @@ const possibleComb = (str) =>{
 }
 
 //variables
-const form = document.getElementById('form'),
+const generateBtn = document.getElementById('generate'),
 input = document.getElementById('email'),
 displayGmails = document.querySelector('.generated-mail'),
 next = document.querySelector('.next-btn'),
 prev = document.querySelector('.prev-btn'),
+copyText = document.querySelector('.gmail'),
+copyBtn = document.querySelector('.gmail>span'),
+currentGmailCount = document.querySelector('.current'),
+totalGmailCount = document.querySelector('.total'),
 gmailContainer = document.querySelector('.all-gmail');
 
-let initial = 0,
-final = 10,
-n=0,
-allGmail=[];
-
+let n=0,
+current =0,
+allGmail;
 
 const createGmailDiv = (gmail,domain) =>{
   const div = document.createElement('div');
   const span = document.createElement('span');
-  span.innerHTML = 'Hi'
+  span.innerHTML = '<i class="fa-regular fa-copy"></i>'
 
   div.className = 'gmail'
   text = `${gmail}@${domain}`
@@ -68,50 +70,64 @@ const createGmailDiv = (gmail,domain) =>{
 
 
 
-form.addEventListener("submit", (e)=>{
+generateBtn.addEventListener("click", (e)=>{
   e.preventDefault()
   const inputValue = input.value.split('@')
   Gmail = inputValue[0]
   Domain = inputValue[1]
-  allGmail=[]
+  allGmail=[];
   n=0;
-  allGmail = possibleComb(Gmail)
-  n = allGmail.length;
-
-  //empaty container
+  current = 0;
   
-  displayGmails.classList.add('active')
+  if(input.value.split('').includes('@') && Domain && Gmail){
+    allGmail = possibleComb(Gmail)
+    n = allGmail.length;
+    displayGmails.classList.add('active')
+    input.style.borderColor = 'black'
+  }else{
+   input.focus() 
+   input.style.borderColor = 'red'
+  }
 
-  final = n<final?n:final;
-  gmailContainer.innerHTML =''
-  DisplayGmails(initial,final);
-
+  if(n>1){
+    allGmail.shift()
+    n = allGmail.length;
+  }
+  
+  totalGmailCount.innerHTML = n;
+  currentGmailCount.innerHTML = current+1;
+  gmailContainer.innerHTML = ''
+  gmailContainer.appendChild(createGmailDiv(allGmail[current],Domain));
+  input.value = ' ';
 })
 
-const Next = (i,f,n) =>{
-  i = i>=0 && n<f? 0 : f;
-  f = n<f ? n : (n-f)>10? f+10 : n;
-  
-  gmailContainer.innerHTML =''
-  DisplayGmails(i,f);
-  console.log(i,f,n)
-}
-const Prev = (i,f,n) =>{
-
-}
-
-const DisplayGmails = (i,f) =>{
-for (let j = i; j < f; i++) {
-  let gmail = allGmail[j];
+next.addEventListener("click", ()=>{
+  if(current+1<n){
+    current +=1;
+  }else{
+    current =0;
+  }
+  gmail = allGmail[current]
+  gmailContainer.innerHTML = ''
   gmailContainer.appendChild(createGmailDiv(gmail,Domain));
-}
-}
+  currentGmailCount.innerHTML = current+1;
+});
+prev.addEventListener("click", ()=>{
+  if(current>0){
+    current -=1;
+  }else{
+    current =n-1;
+  }
+  gmail = allGmail[current]
+  gmailContainer.innerHTML = ''
+  gmailContainer.appendChild(createGmailDiv(gmail,Domain));
+  currentGmailCount.innerHTML = current+1;
+});
 
-next.addEventListener("click",()=>{
-  Next(initial,final,n);
-})
-prev.addEventListener("click",()=>{
-  Prev(initial,final,n);
-  gmailContainer.innerHTML =''
-  DisplayGmails(allGmail);
+//copy text 
+  copyBtn.addEventListener("click", ()=>{
+
+  navigator.clipboard.writeText(copyText.innerText);
+  copyBtn.children[0].classList.toggle('fa-copy')
+  copyBtn.children[0].classList.toggle('fa-square-check')
 })
