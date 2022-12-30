@@ -16,21 +16,24 @@
       <div class="title">Gmail Generater</div>
       <form class="form" id="form">
         <label for="email">Email</label>
-        <input type="email" name="" id="email" onchange="inputText()" />
-        <button type="submit">Generate</button>
+        <input type="email" name="" id="email" onchange="inputText()" required />
+        <button type="submit" id="generate">Generate</button>
       </form>
     </div>
   
-    <div class="generated-mail active">
+    <div class="generated-mail">
       <div class="title">Generated Gmail</div>
       <div class="all-gmail">
-  
+        <div class="gmail">
+          example@gmail.com
+          <span><i class="fa-regular fa-copy"></i></span>
+        </div>
       </div>
       <div class="buttons">
         <div class="prev-btn btn">Previous</div>
         <div class="counter">
-          <span class="current">10</span>/
-          <span class="total">17</span>
+          <span class="current">1</span>/
+          <span class="total">1</span>
         </div>
         <div class="next-btn btn">Next</div>
       </div>
