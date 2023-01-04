@@ -127,6 +127,7 @@ generateBtn.addEventListener('click', e => {
     currentCount.lastElementChild.innerHTML = 0;
     currentCount.firstElementChild.innerHTML = 0;
     gmailContainer.innerHTML =''
+    paginationContainer.innerHTML = ''
   }
 
   //pagination
