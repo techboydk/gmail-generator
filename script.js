@@ -82,8 +82,8 @@ const onChange = () => {
   selectValue = Number(select.value);
   username = inputValue[0];
   domain = inputValue[1];
-  currentCount.firstElementChild.innerHTML= (pageNum-1)*selectValue+1;
-  currentCount.lastElementChild.innerHTML= pageNum*selectValue;
+  currentCount.firstElementChild.innerHTML = (pageNum - 1) * selectValue + 1;
+  currentCount.lastElementChild.innerHTML = pageNum * selectValue;
   numOfPage = Math.ceil(allUserName.length / selectValue);
   gmailContainer.innerHTML = ''
   allUserName.map((username, index) => {
@@ -107,15 +107,27 @@ select.onchange = onChange;
 generateBtn.addEventListener('click', e => {
   e.preventDefault()
   onChange()
-  gmailContainer.innerHTML = ''
-  allUserName = possibleComb(username);
-  numOfPage = Math.ceil(allUserName.length / selectValue);
-  totalCount.innerHTML = allUserName.length;
-  allUserName.map((username, index) => {
-    if (index < selectValue * pageNum && index > (pageNum - 1) * selectValue - 1) {
-      gmailContainer.appendChild(createGmailContainer(username));
-    }
-  })
+  if (input.value.includes('@') && domain !== '' && username !== '') {
+    console.log(true);
+
+    gmailContainer.innerHTML = ''
+    allUserName = possibleComb(username);
+    numOfPage = Math.ceil(allUserName.length / selectValue);
+    totalCount.innerHTML = allUserName.length;
+    allUserName.map((username, index) => {
+      if (index < selectValue * pageNum && index > (pageNum - 1) * selectValue - 1) {
+        gmailContainer.appendChild(createGmailContainer(username));
+      }
+    })
+    input.parentElement.style.borderColor = "#ccc";
+  }else {
+    input.focus();
+    input.parentElement.style.borderColor = "red";
+    console.log(input.parentElement)
+    currentCount.lastElementChild.innerHTML = 0;
+    currentCount.firstElementChild.innerHTML = 0;
+    gmailContainer.innerHTML =''
+  }
 
   //pagination
   if (numOfPage > 1) {
@@ -124,6 +136,7 @@ generateBtn.addEventListener('click', e => {
       paginationContainer.appendChild(createListItem(i));
     }
     pagination = document.querySelectorAll('.pagination li');
+    
   }
 })
 
@@ -136,12 +149,12 @@ document.addEventListener('click', e => {
     pageNum = Number(e.target.innerHTML);
     gmailContainer.innerHTML = ''
     allUserName.map((username, index) => {
-      if (index < selectValue * pageNum && index > (pageNum - 1) * selectValue -1) {
+      if (index < selectValue * pageNum && index > (pageNum - 1) * selectValue - 1) {
         gmailContainer.appendChild(createGmailContainer(username));
       }
     })
-    currentCount.firstElementChild.innerHTML= (pageNum-1)*selectValue+1;
-    currentCount.lastElementChild.innerHTML= pageNum*selectValue;
+    currentCount.firstElementChild.innerHTML = (pageNum - 1) * selectValue + 1;
+    currentCount.lastElementChild.innerHTML = pageNum * selectValue;
     pagination.forEach(el => {
       if (el.classList.contains('active')) {
         el.classList.remove('active')
