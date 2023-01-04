@@ -11,32 +11,58 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="form-container">
-      <div class="title">Gmail Generater</div>
-      <form class="form" id="form">
-        <label for="email">Email</label>
-        <input type="email" name="" id="email" onchange="inputText()" required />
-        <button type="submit" id="generate">Generate</button>
-      </form>
+  <div class="header">
+    <div class="title">Gmail Generator</div>
+  </div>
+  <div class="main">
+    <div class="title">Gmail Generator</div>
+    <div class="text">
+      <p>
+        Generate many new mailboxes from your gmail email. Email generator can quickly create multiple aliases for your
+        gmail.
+        All the boxes will redirect the letters to your main mailbox. So having one account, you can automatically have
+        many other mail accounts to Google.</p>
+      <p>
+        Also, this Gmail generator is known under the following names: Googlemail Trick, Gmail dot Trick, Fake gmail
+        generator, Fake gmail.</p>
+      <p>
+        We do not store your gmail address.</p>
+      <p>
+        Useful links: <a target="_blank" rel="nofollow" href="https://support.google.com/mail/answer/7436150">Dots don't
+          matter in Gmail addresses</a> and <a rel="nofollow" target="_blank"
+          href="https://gmail.googleblog.com/2008/03/2-hidden-ways-to-get-more-from-your.html">Official Gmail Blog</a>.
+      </p>
     </div>
-  
-    <div class="generated-mail">
-      <div class="title">Generated Gmail</div>
-      <div class="all-gmail">
-        <div class="gmail">
-          example@gmail.com
-        </div>
+
+    <form class="form" id="form">
+      <div class="gmail-per-page">
+        Gmail aliases per page:
+        <select name="" id="gmailperpage">
+          <option value="128">128</option>
+          <option value="256" selected>256</option>
+          <option value="512">512</option>
+          <option value="1024">1024</option>
+          <option value="2048">2048</option>
+          <option value="4096">4096</option>
+          <option value="8192">8192</option>
+          <option value="16384">16384</option>
+        </select>
       </div>
-      <span class="copy-btn" ><i class="fa-regular fa-copy"></i></span>
-      <div class="buttons">
-        <div class="prev-btn btn">Previous</div>
-        <div class="counter">
-          <span class="current">1</span>/
-          <span class="total">1</span>
-        </div>
-        <div class="next-btn btn">Next</div>
+      <div class="input-container">
+        <input type="email" maxlength="30" id="username" value="example@gmail.com" required />
       </div>
+      <button type="submit" class="generate" id="generate">Generate</button>
+    </form>
+
+    <div class="display-gmail">
+      <div class="gmail-count-container">
+        <div class="total">Number of possible email aliases: <span>128</span></div>
+        <div class="current">(<span class="initial">0</span>-<span class="final">64</span>)</div>
+      </div>
+      <div class="pagination">
+        <ul></ul>
+      </div>
+      <div class="gmail-container"></div>
     </div>
   </div>
 </body>
